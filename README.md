@@ -51,7 +51,3 @@ docker pull mongo:4.4-focal
 
 docker run -p 27017:27017 mongo:4.4-focal
 
-## Usuario de prueba
-
-username: gatitofeliz@gmail.com
-password: gatitofeliz12345
