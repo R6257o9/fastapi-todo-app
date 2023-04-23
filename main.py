@@ -4,6 +4,7 @@ from beanie import init_beanie
 
 from core.config import settings
 from api.api_v1.router import router
+from models.todo_model import Todo
 from models.user_model import User
 
 app = FastAPI(
@@ -22,7 +23,8 @@ async def app_init():
     await init_beanie(
         database=db_client,
         document_models= [
-           User
+           User,
+           Todo
         ]
     )
 
