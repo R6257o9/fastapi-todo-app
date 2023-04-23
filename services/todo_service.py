@@ -30,8 +30,15 @@ class TodoService:
         return todo 
      
      @staticmethod
+     # current_user, es el usuario actual que está tratando de actualizar la tarea
+     # todo_id, es el ID de la tarea que se va a actualizar
+     # data,  es el objeto TodoUpdate que contiene los campos que se van a actualizar en la tarea
      async def update_todo(current_user: User, todo_id: UUID, data: TodoUpdate):
+        # buscar la tarea que se va a actualizar. Si la tarea no existe o si el usuario actual no es el propietario de la tarea, se lanzará una excepción
         todo = await TodoService.retrieve_todo(current_user, todo_id)
+        # "await todo.update({"$set": data.dict(exclude_unset=True)})" actualiza los campos específicos de un documento en una colección de MongoDB utilizando la operación "$set"
+        # El método "dict" de la instancia "data" de la clase "TodoUpdate" devuelve un diccionario que representa los campos y valores actualizados
+        # El parámetro "exclude_unset" indica que solo se incluirán en el diccionario los campos que tengan un valor establecido (que no sean None)
         await todo.update({"$set": data.dict(exclude_unset=True)})
         
         await todo.save()
