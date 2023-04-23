@@ -2,7 +2,7 @@
 
 ### Python3
 
-Se necesita al menos _Python v3.7_ o superior para correr adecuadamente la app.
+Se necesita al menos _Python v3.10_ o superior para correr adecuadamente la app.
 
 ```bash
 sudo apt install python3 python3-pip python3-venv
