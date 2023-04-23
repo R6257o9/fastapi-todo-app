@@ -1,0 +1,22 @@
+from typing import List
+
+from models.todo_model import Todo
+from models.user_model import User
+from schemas.todo_schema import TodoCreate
+
+
+class TodoService:
+     @staticmethod
+     async def list_todos(user: User) -> List[Todo]:
+        todos = await Todo.find(Todo.owner.id == user.id).to_list()
+        return todos
+     
+     @staticmethod
+     async def create_todo(user: User, data: TodoCreate) -> Todo:
+          # Se crea una instancia de clase Todo con los datos proporcionados y el propietario del usuario
+          # Está creando un nuevo objeto Todo con los datos proporcionados y el propietario del usuario.
+          # data.dict() convierte un objeto data en un diccionario. Esto se hace para garantizar que los campos del objeto se puedan pasar como argumentos de palabras clave al constructor de Todo          
+          todo = Todo(**data.dict(), owner=user) # **data.dict() está desempaquetando el diccionario en argumentos de palabras clave, para que el constructor de Todo pueda recibirlos como argumentos separados
+          return await todo.insert()
+     
+ 

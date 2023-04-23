@@ -25,6 +25,11 @@ JWT_REFRESH_SECRET_KEY=<RANDOM_SECTURE_LONG_STRING>
 MONGO_CONNECTION_STRING=<MONGO_DB_CONNECTION_STRING>
 # MONGO_CONNECTION_STRING=mongodb://172.28.87.20:27017/ -> conexion host utilizando WSL Ubuntu en Windows
 # MONGO_CONNECTION_STRING=mongodb://localhost:27017/ -> conexion local en Windows/Linux
+
+MONGO_DB_NAME=<RAMDOM_STRING>
+MONGO_USERNAME=<RAMDOM_STRING>
+MONGO_PASSWORD=<RAMDOM_STRING>
+
 ```
 
 ### Instalar librerias
@@ -45,3 +50,8 @@ MONGO_CONNECTION_STRING=<MONGO_DB_CONNECTION_STRING>
 docker pull mongo:4.4-focal
 
 docker run -p 27017:27017 mongo:4.4-focal
+
+## Usuario de prueba
+
+username: gatitofeliz@gmail.com
+password: gatitofeliz12345
