@@ -19,10 +19,12 @@ source .venv-app/bin/activate
 
 Para configurar el archivo .env en el backend, cree un archivo .env y agregue lo siguiente en el archivo .env
 
-```
+```python
 JWT_SECRET_KEY=<RAMDOM_STRING>
 JWT_REFRESH_SECRET_KEY=<RANDOM_SECTURE_LONG_STRING>
 MONGO_CONNECTION_STRING=<MONGO_DB_CONNECTION_STRING>
+# MONGO_CONNECTION_STRING=mongodb://172.28.87.20:27017/ -> conexion host utilizando WSL Ubuntu en Windows
+# MONGO_CONNECTION_STRING=mongodb://localhost:27017/ -> conexion local en Windows/Linux
 ```
 
 ### Instalar librerias
