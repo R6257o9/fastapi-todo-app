@@ -50,5 +50,5 @@ class TodoService:
         if todo:
             await todo.delete()
             
-        return None
+        return {"message" : "Successfully removed"}
  
