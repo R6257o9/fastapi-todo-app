@@ -1,4 +1,5 @@
 from typing import List
+from uuid import UUID
 
 from models.todo_model import Todo
 from models.user_model import User
@@ -19,4 +20,12 @@ class TodoService:
           todo = Todo(**data.dict(), owner=user) # **data.dict() está desempaquetando el diccionario en argumentos de palabras clave, para que el constructor de Todo pueda recibirlos como argumentos separados
           return await todo.insert()
      
+     
+     @staticmethod
+     # El parámetro current_user se utiliza para asegurar que el usuario que está haciendo la solicitud de recuperación de la tarea sea el propietario de la tarea
+     # Sin este parámetro, cualquier usuario autenticado podría recuperar cualquier tarea de cualquier otro usuario. 
+     # En resumen, el uso de current_user ayuda a mantener la seguridad de la aplicación y garantiza que los usuarios solo puedan acceder a los recursos a los que tienen permiso.
+     async def retrieve_todo(current_user: User, todo_id: UUID):
+        todo = await Todo.find_one(Todo.todo_id == todo_id, Todo.owner.id == current_user.id)
+        return todo 
  

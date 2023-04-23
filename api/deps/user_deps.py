@@ -15,6 +15,7 @@ reuseable_oauth = OAuth2PasswordBearer(
     scheme_name="JWT"
 )
 
+# Valida el token de autenticación enviado en la solicitud. 
 async def get_current_user(token: str = Depends(reuseable_oauth)) -> User:
     try:
         payload = jwt.decode(
@@ -22,6 +23,7 @@ async def get_current_user(token: str = Depends(reuseable_oauth)) -> User:
         )
         token_data = TokenPayload(**payload)
         
+        # Se verifica si el token ha expirado utilizando la información de tiempo de expiración en el token y la hora actual. Si el token ha expirado, se lanza una excepción HTTP 401
         if datetime.fromtimestamp(token_data.exp) < datetime.now():
             raise HTTPException(
                 status_code = status.HTTP_401_UNAUTHORIZED,
@@ -35,6 +37,7 @@ async def get_current_user(token: str = Depends(reuseable_oauth)) -> User:
             headers={"WWW-Authenticate": "Bearer"},
         )
         
+    # Obtener el objeto de usuario correspondiente al ID de usuario almacenado en el token. Si el usuario no se encuentra en la base de datos, se lanza una excepción HTTP 404.
     user = await UserService.get_user_by_id(token_data.sub)
     
     if not user:
@@ -42,5 +45,5 @@ async def get_current_user(token: str = Depends(reuseable_oauth)) -> User:
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Could not find user",
         )
-    
+    # Devuelve el objeto de usuario si se han validado correctamente el token y el usuario
     return user
