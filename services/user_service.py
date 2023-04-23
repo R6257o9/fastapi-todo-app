@@ -18,13 +18,13 @@ class UserService:
         return user_in
 
     @staticmethod
-    async def authenticate(email: str, password:str) -> Optional[User]:
-        user = UserService.get_user_by_email(email = email)
+    async def authenticate(email: str, password: str) -> Optional[User]:
+        user = await UserService.get_user_by_email(email=email)
         if not user:
-            return
-        if not verify_password(password=password, hashed_pass=User.hashed_password):
             return None
-
+        if not verify_password(password=password, hashed_pass=user.hashed_password):
+            return None
+        
         return user
             
 
