@@ -34,3 +34,10 @@ MONGO_CONNECTION_STRING=<MONGO_DB_CONNECTION_STRING>
 ### Run app
 
 `uvicorn main:app --reload`
+
+
+## Docker 
+
+### Run Mongo Image 
+
+docker run -p 27017:27017 mongo:4.4-focal
