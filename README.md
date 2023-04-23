@@ -40,7 +40,7 @@ MONGO_CONNECTION_STRING=<MONGO_DB_CONNECTION_STRING>
 
 ## Docker 
 
-### Run Mongo Image 
+### Run mongo image
 
 docker pull mongo:4.4-focal
 
