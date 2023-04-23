@@ -3,7 +3,7 @@ from uuid import UUID
 
 from models.todo_model import Todo
 from models.user_model import User
-from schemas.todo_schema import TodoCreate
+from schemas.todo_schema import TodoCreate, TodoUpdate
 
 
 class TodoService:
@@ -28,4 +28,20 @@ class TodoService:
      async def retrieve_todo(current_user: User, todo_id: UUID):
         todo = await Todo.find_one(Todo.todo_id == todo_id, Todo.owner.id == current_user.id)
         return todo 
+     
+     @staticmethod
+     async def update_todo(current_user: User, todo_id: UUID, data: TodoUpdate):
+        todo = await TodoService.retrieve_todo(current_user, todo_id)
+        await todo.update({"$set": data.dict(exclude_unset=True)})
+        
+        await todo.save()
+        return todo
+    
+     @staticmethod
+     async def delete_todo(current_user: User, todo_id: UUID) -> None:
+        todo = await TodoService.retrieve_todo(current_user, todo_id)
+        if todo:
+            await todo.delete()
+            
+        return None
  

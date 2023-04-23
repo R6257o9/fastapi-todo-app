@@ -4,7 +4,7 @@ from uuid import UUID
 from models.todo_model import Todo
 from models.user_model import User
 
-from schemas.todo_schema import TodoCreate, TodoOut
+from schemas.todo_schema import TodoCreate, TodoOut, TodoUpdate
 from services.todo_service import TodoService
 from api.deps.user_deps import get_current_user
 
@@ -24,10 +24,9 @@ async def create_todo(data: TodoCreate, current_user: User = Depends(get_current
 async def retrieve(todo_id: UUID, current_user: User = Depends(get_current_user)):
     return await TodoService.retrieve_todo(current_user, todo_id)
 
-
-# @todo_router.put('/{todo_id}', summary="Update todo by todo_id", response_model=TodoOut)
-# async def update(todo_id: UUID, data: TodoUpdate, current_user: User = Depends(get_current_user)):
-#     return await TodoService.update_todo(current_user, todo_id, data)
+@todo_router.put('/{todo_id}', summary="Update todo by todo_id", response_model=TodoOut)
+async def update(todo_id: UUID, data: TodoUpdate, current_user: User = Depends(get_current_user)):
+    return await TodoService.update_todo(current_user, todo_id, data)
 
 
 @todo_router.delete('/{todo_id}', summary="Delete todo by todo_id")
