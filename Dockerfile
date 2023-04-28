@@ -9,7 +9,7 @@ COPY ./ ./
 RUN pip3 install --upgrade pip
 RUN pip3 install --no-cache-dir --upgrade -r requirements.txt
 
-ENV MONGO_URI mongodb://localhost:27017/
+ENV MONGO_CONNECTION_STRING mongodb://localhost:27017/
  
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
 
