@@ -34,5 +34,5 @@ class Todo(Document):
         self.updated_at = datetime.utcnow()
         
     
-    class Collection:
-        name = "todos"
+    class Settings:
+        collection_name = "users"

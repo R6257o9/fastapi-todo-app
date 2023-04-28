@@ -2,8 +2,9 @@ from fastapi import FastAPI
 from motor.motor_asyncio import AsyncIOMotorClient
 from beanie import init_beanie
 
-from core.config import settings
+
 from api.api_v1.router import router
+from core.config import settings
 from models.todo_model import Todo
 from models.user_model import User
 
