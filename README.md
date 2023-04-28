@@ -51,3 +51,7 @@ docker pull mongo:4.4-focal
 
 docker run -p 27017:27017 mongo:4.4-focal
 
+### Dockerfile
+
+docker build --tag castor .
+docker run -d -p 80:80 farmappback:castor
