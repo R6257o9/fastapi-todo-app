@@ -42,16 +42,30 @@ MONGO_PASSWORD=<RAMDOM_STRING>
 
 `uvicorn main:app --reload`
 
-
 ## Docker 
 
 ### Run mongo image
 
-docker pull mongo:4.4-focal
+`docker pull mongo:4.4-focal`
 
-docker run -p 27017:27017 mongo:4.4-focal
+`docker run -p 27017:27017 mongo:4.4-focal`
+
 
 ### Dockerfile
 
-docker build --tag castor .
-docker run -d -p 80:80 farmappback:castor
+Crear y correr la imagen localmente
+
+`docker build --tag farm-todo-app-back:paris .`
+
+`docker run -d -p 8000:8000 farm-todo-app-back:paris`
+
+### DockerHub 
+
+Descargar la imagen de DockerHub:
+
+`docker pull hugoogonz/farm-todo-app-back:paris`
+
+Correr imagen descargada desde Docker:
+
+`docker run --name farm-todo-app -d -p 8000:8000 hugoogonz/farm-todo-app-back:paris`
+
